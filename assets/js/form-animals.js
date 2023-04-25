@@ -25,7 +25,7 @@ const sendOnlyAnimals = document.querySelector('.main-modal-animals .btn-play-ga
 let totalForm = document.querySelector('.total-balance span')
 sendOnlyAnimals.addEventListener('click', (e) => {
     e.preventDefault()
-    const modal = sendOnlyAnimals.parentElement.parentElement
+    const modal = sendOnlyAnimals.parentElement.parentElement.parentElement
     const input = sendOnlyAnimals.parentElement.querySelector('input')
     const alert = sendOnlyAnimals.parentElement.parentElement.querySelector('.alert')
     const path = sendOnlyAnimals.parentElement.parentElement.querySelector('.current-animal').getAttribute('src')
