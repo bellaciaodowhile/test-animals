@@ -68,17 +68,15 @@
     margin-bottom: 40px;
     
 }
-.container-form-animals .grid-animals .main-animals {
-    align-self: center;
-}
+.container-form-animals .grid-animals .main-animals {margin-top: 80px;}
 .container-form-animals .grid-animals .main-animals .animals {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    /* margin-top: 20px; */
 }
 .container-form-animals .grid-animals .main-animals .item-animals {
+    position: relative;
     border-radius: 50%;
     width: 106px;
     background: #efefef;
@@ -96,7 +94,14 @@
     transform: translate(0, -3px);
     box-shadow: none;
 }
-
+.container-form-animals .grid-animals .main-animals .item-animals img.icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: 200ms fadeInDown ease-in;
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+}
 
 /* Modal */ 
 .main-modal-animals {
@@ -158,6 +163,13 @@
 .main-modal-animals .modal-content-animals i {
     cursor: pointer;
 }
+.main-modal-animals .small-text-note {
+    text-align: center;
+    font-size: .8em;
+    color: var(--green);
+    margin-top: 20px;
+    
+}
 .main-modal-animals input {
     width: 100%;
     margin-top: 20px;
@@ -199,9 +211,7 @@
     box-shadow: 0px 5px 10px var(--green);
 }
 /* Form Total */
-.form-total {
-    /* align-self: center; */
-}
+.form-total {margin-top: 80px;}
 .main-form-total {
     background: var(--blueDark);
     box-shadow: 0px 0px 15px var(--green);
@@ -219,9 +229,6 @@
 }
 .main-form-total .main-balance .date {
     font-size: .9em;
-}
-.main-form-total .main-balance .balance {
-
 }
 .main-form-total .hours-selected-form {
     padding: 20px;
@@ -305,7 +312,23 @@
     transform: translate(0, -5px);
     box-shadow: 0 5px 15px var(--green);
 }
-
+.main-modal-animals .info {
+    color: white;
+}
+.main-modal-animals .w-100 {
+    text-align: left;
+    margin-top: 24px;
+}
+.tooltip-animals {
+    position: relative;
+    display: inline-block;
+     /* If you want dots under the hoverable text */
+    text-align: left;
+}
+.grid-animals .note-small {
+    text-align: center;
+    margin-top: 40px;
+}
 
 /* Medias */
 @media only screen and (max-width: 1250px) {
@@ -314,14 +337,31 @@
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
     }
+    .form-total {
+        grid-column-start: 1;
+        grid-column-end: -1;
+    }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 1335px) {
+    .container-form-animals .grid-animals {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+    .form-total {
+        grid-column-start: 1;
+        grid-column-end: -1;
+    }
+}
+
+@media only screen and (max-width: 770px) {
     .container-form-animals .grid-animals {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 20px;
     }
+    
 }
 
 /* Animations */
@@ -335,3 +375,27 @@
         transform: translateY(0);
     }
 }
+
+  
+  /* Tooltip text */
+  .tooltip-animals .tooltiptext {
+    visibility: hidden;
+    width: 215px;
+    background-color: var(--blueDark);
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -45px;
+    left: 26px;
+    box-shadow: 0 0 10px var(--green);
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip-animals:hover .tooltiptext {
+    visibility: visible;
+  }

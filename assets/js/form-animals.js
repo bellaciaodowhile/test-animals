@@ -41,6 +41,7 @@ sendOnlyAnimals.addEventListener('click', (e) => {
             name,
             value: input.value
         })
+        animalsChecked() // Animals checked
         modal.style.boxShadow = '0px 15px 40px var(--green)'
         setTimeout(() => {
             modal.style.boxShadow = '0px 10px 20px #131915'
@@ -54,7 +55,6 @@ sendOnlyAnimals.addEventListener('click', (e) => {
         totalForm.innerHTML = total + ',00'
     }
 })
-
 function deleteItem(e, name) {
     if (confirm(`¿Seguro que quiere eliminar al ${ name } de sus apuestas?`))  {
         e.target.parentElement.remove()
@@ -64,6 +64,7 @@ function deleteItem(e, name) {
         const total = animalsSelected.reduce((previous, current) => {
             return parseInt(previous) + parseInt(current.value);
         }, 0);
+        animalsUnChecked(name)
         totalForm.innerHTML = total + ',00'
     }
 }
@@ -85,8 +86,33 @@ dataAnimals.map((el, index) => {
     dataAnimalsContent.innerHTML += `
     <div class="item-animals">
         <img src="./assets/img/animals/${el.number}.png" alt="${el.name}">
+        <img class="icon" src="./assets/img/animals/helpers/checked.png">
     </div>`
 })
+const itemsAnimals = [...document.querySelectorAll('.grid-animals .item-animals')]
+function animalsChecked() {
+    itemsAnimals.map((el, index) => {
+        const animal = el.children[0].getAttribute('alt')
+        animalsSelected.map(x => {
+            console.log(x.name)
+            if (animal.trim() == x.name.trim()) {
+                console.log(animal)
+                if (el.children[1].style.opacity == '' || el.children[1].style.opacity == '0') {
+                    el.children[1].style.opacity = '1'
+                } 
+            }
+        })
+    })
+}
+function animalsUnChecked(name) {
+    itemsAnimals.map((el, index) => {
+        const animal = el.children[0].getAttribute('alt')
+        if (animal == name) {
+            console.log(animal)
+            el.children[1].style.opacity = '0'
+        }
+    })
+}
 // Data Hours
 const dataHoursContent = document.querySelector('.data-hours-content')
 dataHours.map((el, index) => {
@@ -159,7 +185,7 @@ function hoursSelectedFunc() {
         hoursSelectedForm.appendChild(itemHourSelected)
     })
 }
-const itemsAnimals = [...document.querySelectorAll('.grid-animals .item-animals')]
+
 itemsAnimals.map((el, index) => {
     el.addEventListener('click', (e) => {
         if (hoursSelected.length > 0) {
