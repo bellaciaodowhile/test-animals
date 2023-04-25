@@ -51,10 +51,6 @@ sendOnlyAnimals.addEventListener('click', (e) => {
             input.value = ''
         }, 500)
         animalsSelectedFunc()
-        const total = animalsSelected.reduce((previous, current) => {
-            return parseInt(previous) + parseInt(current.value);
-        }, 0);
-        totalForm.innerHTML = total + ',00'
     }
 })
 function deleteItem(e, name) {
@@ -70,18 +66,7 @@ function deleteItem(e, name) {
         totalForm.innerHTML = total + ',00'
     }
 }
-function animalsSelectedFunc() {
-    animalsSelectedForm.innerHTML = ''
-    animalsSelected.map(el => {
-        animalsSelectedForm.innerHTML += `
-        <div class="item-animals-selected">
-            <img src="${ el.path }">
-            <div>${ el.name }</div>
-            <span>${ el.value }</span>
-            <i class="material-icons" onclick="deleteItem(event, '${ el.name }')">delete</i>
-        </div>` 
-    })
-}
+
 // Data Animals
 const dataAnimalsContent = document.querySelector('.data-animals-content')
 dataAnimals.map((el, index) => {
@@ -183,7 +168,27 @@ function hoursSelectedFunc() {
         itemHourSelected.textContent = el
         hoursSelectedForm.appendChild(itemHourSelected)
     })
+    animalsSelectedFunc()
 }
+function animalsSelectedFunc() {
+    animalsSelectedForm.innerHTML = ''
+    animalsSelected.map(el => {
+        animalsSelectedForm.innerHTML += `
+        <div class="item-animals-selected">
+            <img src="${ el.path }">
+            <div>${ el.name }</div>
+            <span>${ (hoursSelected.length * el.value) }</span>
+            <i class="material-icons" onclick="deleteItem(event, '${ el.name }')">delete</i>
+        </div>` 
+    })
+    const total = animalsSelected.reduce((previous, current) => {
+        return parseInt(previous) + parseInt(current.value);
+    }, 0);
+    totalForm.innerHTML = (total * hoursSelected.length) + ',00'
+  
+}
+
+
 // Show Modal Animals
 itemsAnimals.map((el, index) => {
     el.addEventListener('click', (e) => {
@@ -211,11 +216,25 @@ const dateCurrentDom = document.querySelector('.form-total .date span')
 dateCurrentDom.innerHTML = currentDate
 
 // Final Form Total
+const itemsAnimalsSelectedFinal = [...document.querySelectorAll('.form-total .item-animals-selected')]
+const itemsHoursSelectedFinal = [...document.querySelectorAll('.form-total .item-hour-selected')]
+function totalFormFunc() {
+    console.log('Hola')
+    // totalForm.innerHTML = total + ',00'
+    let valueTotal = []
+    console.log(itemsAnimalsSelectedFinal)
+    itemsAnimalsSelectedFinal.map(el => {
+        console.log(el)
+        // valueTotal.push(parseInt(el.querySelector('span').textContent.trim()))
+    })
+    const total = valueTotal.reduce((previous, current) => {
+        return parseInt(previous) + parseInt(current);
+    }, 0);
+    // console.log(valueTotal)
+}
 const btnSendFormTotal = document.querySelector('.form-total .btn-send')
 btnSendFormTotal.addEventListener('click', (e) => {
     e.preventDefault();
-    const itemsAnimalsSelectedFinal = [...document.querySelectorAll('.item-animals-selected')]
-    const itemsHoursSelectedFinal = [...document.querySelectorAll('.item-hour-selected')]
     let valueTotal = []
     let animalsFinal = []
     let hoursSelectedFinal = []
@@ -232,9 +251,9 @@ btnSendFormTotal.addEventListener('click', (e) => {
     if (total <= myBalance) {
         // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
         const formFinal = [hoursSelectedFinal, animalsFinal, currentDate]
+        closeModalAnimals.parentElement.parentElement.style.display = 'flex'
         formModal.style.display = 'none'
         formFinalContent.style.display = 'block'    
-        
         
 
 
