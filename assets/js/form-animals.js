@@ -207,6 +207,8 @@ itemsAnimals.map((el, index) => {
         }
     })
 })
+// Selected Items Animals
+
 // Today Date
 const date = new Date();
 let day = date.getDate();
@@ -220,6 +222,7 @@ dateCurrentDom.innerHTML = currentDate
 const btnSendFormTotal = document.querySelector('.form-total .btn-send')
 btnSendFormTotal.addEventListener('click', (e) => {
     e.preventDefault();
+    const itemsAnimalsSelected = [...document.querySelectorAll('.main-animals .item-animals-selected')]
     const itemsAnimalsSelectedFinal = [...document.querySelectorAll('.form-total .item-animals-selected')]
     const itemsHoursSelectedFinal = [...document.querySelectorAll('.form-total .item-hour-selected')]
     let valueTotal = []
@@ -236,21 +239,25 @@ btnSendFormTotal.addEventListener('click', (e) => {
         return parseInt(previous) + parseInt(current);
     }, 0);
     if (hoursSelected.length > 0) {
-        if (total <= myBalance) {
-            const formFinal = [hoursSelectedFinal, animalsFinal, currentDate] // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
-            let finalFormText = `+ Fecha: `
-            finalFormText += formFinal[2] + ' \n'
-            finalFormText += `+ Horarios: \n`
-            formFinal[0].map(hour => finalFormText += `- ${hour} \n`)
-            finalFormText += `+ Jugadas: \n`
-            formFinal[1].map(animal => finalFormText += `- ${animal} Procesado \n`)
-            finalFormText += `+ Total: ${total}\n`
-            finalFormText += '¡¡Gracias por su compra!!'
-            alert(finalFormText)
+        if (animalsFinal.length > 0) {
+            if (total <= myBalance) {
+                const formFinal = [hoursSelectedFinal, animalsFinal, currentDate] // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
+                let finalFormText = `+ Fecha: `
+                finalFormText += formFinal[2] + ' \n'
+                finalFormText += `+ Horarios: \n`
+                formFinal[0].map(hour => finalFormText += `- ${hour} \n`)
+                finalFormText += `+ Jugadas: \n`
+                formFinal[1].map(animal => finalFormText += `- ${animal} Procesado \n`)
+                finalFormText += `+ Total: ${total}\n`
+                finalFormText += '¡¡Gracias por su compra!!'
+                alert(finalFormText)
+            } else {
+                alert('Debe recargar su saldo para hacer las apuestas, verifique su balance por favor...')
+            }
         } else {
-            alert('Debe recargar su saldo para hacer las apuestas, verifique su balance por favor...')
+            alert('Debe seleccionar un animalito')
         }
-    } else {
+    }  else {
         alert('Debe seleccionar una hora')
     }
 })
