@@ -118,6 +118,9 @@
     padding: 8em 2em 4em 2em;
     overflow-y: auto;
 }
+.main-modal-animals .form-final-content {
+    display: none;
+}
 .main-modal-animals .alert {
     text-align: center;
     font-size: small;
@@ -253,8 +256,9 @@
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 10px;
-    color: white;  
+    color: white;
     margin-top: 20px;
+    font-size: .8em;
 }
 .main-form-total .animals-selected-form .item-animals-selected div {
    margin-left: 20px;
@@ -343,7 +347,7 @@
     }
 }
 
-@media only screen and (max-width: 1335px) {
+@media only screen and (max-width: 1250px) {
     .container-form-animals .grid-animals {
         display: grid;
         grid-template-columns: 1fr 1fr;

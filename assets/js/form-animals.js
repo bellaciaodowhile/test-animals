@@ -14,6 +14,8 @@ valueAnimals.addEventListener('keyup', (e) => {
 })
 
 // Form Animals Only
+const formModal = document.querySelector('.main-modal-animals .form-modal')
+const formFinalContent = document.querySelector('.main-modal-animals .form-final-content')
 const myBalance = 40; // Acá es mi balance
 const balance = document.querySelector('.form-total .balance span') // Acá es donde aárecerá mi balance
 balance.innerHTML = myBalance + ',00'
@@ -94,9 +96,7 @@ function animalsChecked() {
     itemsAnimals.map((el, index) => {
         const animal = el.children[0].getAttribute('alt')
         animalsSelected.map(x => {
-            console.log(x.name)
             if (animal.trim() == x.name.trim()) {
-                console.log(animal)
                 if (el.children[1].style.opacity == '' || el.children[1].style.opacity == '0') {
                     el.children[1].style.opacity = '1'
                 } 
@@ -108,7 +108,6 @@ function animalsUnChecked(name) {
     itemsAnimals.map((el, index) => {
         const animal = el.children[0].getAttribute('alt')
         if (animal == name) {
-            console.log(animal)
             el.children[1].style.opacity = '0'
         }
     })
@@ -185,7 +184,7 @@ function hoursSelectedFunc() {
         hoursSelectedForm.appendChild(itemHourSelected)
     })
 }
-
+// Show Modal Animals
 itemsAnimals.map((el, index) => {
     el.addEventListener('click', (e) => {
         if (hoursSelected.length > 0) {
@@ -195,6 +194,8 @@ itemsAnimals.map((el, index) => {
             closeModalAnimals.parentElement.parentElement.style.display = 'flex'
             currentAnimal.setAttribute('src', pathAnimalCurrent)
             currentAnimal.setAttribute('alt', name)
+            formModal.style.display = 'block'
+            formFinalContent.style.display = 'none'
         } else {
             alert('Debe seleccionar al menos una hora primero')
         }
@@ -229,9 +230,16 @@ btnSendFormTotal.addEventListener('click', (e) => {
         return parseInt(previous) + parseInt(current);
     }, 0);
     if (total <= myBalance) {
-        alert('Felicidades por su compra!!')
         // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
         const formFinal = [hoursSelectedFinal, animalsFinal, currentDate]
+        formModal.style.display = 'none'
+        formFinalContent.style.display = 'block'    
+        
+        
+
+
+
+
         console.log(formFinal)
     } else {
         alert('Debe recargar su saldo para hacer las apuestas, verifique su balance por favor...')
