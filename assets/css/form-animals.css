@@ -120,6 +120,7 @@
 }
 .main-modal-animals .form-final-content {
     display: none;
+    text-align: center;
 }
 .main-modal-animals .alert {
     text-align: center;
@@ -200,7 +201,7 @@
     padding: 10px;
     background: var(--green);
     color: var(--blueDark);
-    font-weight: bold;
+    font-weight: 800;
     border: none;
     outline: none;
     border-radius: 200px;
@@ -326,14 +327,65 @@
 .tooltip-animals {
     position: relative;
     display: inline-block;
-     /* If you want dots under the hoverable text */
     text-align: left;
 }
 .grid-animals .note-small {
     text-align: center;
     margin-top: 40px;
 }
-
+.form-final-content .hours-final-form {display: flex;justify-content: center;gap: 10px;margin-top: 20px;}
+.form-final-content .hours-final-form .item-hour-selected {background: var(--green);color: var(--blueDark);font-weight: bold;border-radius: 200px;padding: 1px 10px;}
+.form-final-content .animals-final-form {display: flex;flex-direction: column;margin-top: 20px;}
+.form-final-content .animals-final-form .item-animals-selected {display: flex;align-items: center;color: white;margin-bottom: 10px;}
+.form-final-content .animals-final-form .item-animals-selected img {
+    width: 70px;
+    background: white;
+    border-radius: 200px;
+    margin-right: 10px;
+}
+.form-final-content .final-total {
+  margin: 20px auto;
+}
+.form-final-content h6 {
+  text-align: center;
+}
+.form-final-content .fecha-final {
+  margin-bottom: 20px;
+  display: block;
+  color: white;
+}
+.form-final-content .animals-final-form .item-animals-selected div {
+    color: var(--green);
+    font-weight: bold;
+}
+.form-final-content .animals-final-form .item-animals-selected div span {
+    border-radius: 200px;
+    background: white;
+    padding: 2px 5px;
+    margin: 0 5px;
+    color: var(--blueDark);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+.form-final-content .btn-send-final-form {
+  width: 100%;
+  margin-top: 20px;
+  background: var(--green);
+  color: var(--blueDark);
+  font-weight: 800;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  border-radius: 200px;
+  padding: 5px;
+  box-shadow: 1px 1px 15px var(--green);
+  border: none;
+  transition: all 200ms ease-in-out;
+}
+.form-final-content .btn-send-final-form:hover {
+  transform: translate(0, -3px);
+  box-shadow: none;
+}
 /* Medias */
 @media only screen and (max-width: 1250px) {
     .container-form-animals .grid-animals {
@@ -379,9 +431,6 @@
         transform: translateY(0);
     }
 }
-
-  
-  /* Tooltip text */
   .tooltip-animals .tooltiptext {
     visibility: hidden;
     width: 215px;
@@ -390,8 +439,6 @@
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-   
-    /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
     top: -45px;
@@ -399,7 +446,112 @@
     box-shadow: 0 0 10px var(--green);
   }
   
-  /* Show the tooltip text when you mouse over the tooltip container */
   .tooltip-animals:hover .tooltiptext {
     visibility: visible;
+  }
+
+  
+  .form-final-content .confetti {
+    position: absolute;
+    animation: grow 1.4s cubic-bezier(0.42, 0, 0.275, 1.155) both;
+  }
+  .form-final-content .confetti:nth-child(1) {
+    width: 12px;
+    height: 12px;
+    left: 12px;
+    top: 16px;
+  }
+  .form-final-content .confetti:nth-child(2) {
+    width: 18px;
+    height: 18px;
+    left: 168px;
+    top: 84px;
+  }
+  .form-final-content .confetti:nth-child(3) {
+    width: 10px;
+    height: 10px;
+    left: 32px;
+    top: 162px;
+  }
+  .form-final-content .confetti:nth-child(4) {
+    width: 20px;
+    height: 20px;
+    left: 82px;
+    top: -12px;
+  }
+  .form-final-content .confetti:nth-child(5) {
+    width: 14px;
+    height: 14px;
+    left: 125px;
+    top: 162px;
+  }
+  .form-final-content .confetti:nth-child(6) {
+    width: 10px;
+    height: 10px;
+    left: 16px;
+    top: 16px;
+  }
+  .form-final-content .confetti:nth-child(1) {
+    animation-delay: 0.7s;
+  }
+  .form-final-content .confetti:nth-child(2) {
+    animation-delay: 1.4s;
+  }
+  .form-final-content .confetti:nth-child(3) {
+    animation-delay: 2.1s;
+  }
+  .form-final-content .confetti:nth-child(4) {
+    animation-delay: 2.8s;
+  }
+  .form-final-content .confetti:nth-child(5) {
+    animation-delay: 3.5s;
+  }
+  .form-final-content .confetti:nth-child(6) {
+    animation-delay: 4.2s;
+  }
+  
+  .form-final-content .checkmark-animals {
+    position: relative;
+    padding: 30px;
+    animation: checkmarkAni 31s cubic-bezier(0.42, 0, 0.275, 1.155) both infinite;
+  }
+  
+  .form-final-content .checkmark__check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate3d(-50%, -50%, 0);
+    fill: #fff;
+  }
+  
+  .form-final-content .checkmark__back {
+    animation: rotate 35s linear both infinite;
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes grow {
+    0%, 100% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  @keyframes checkmarkAni {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    10%, 50%, 90% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
