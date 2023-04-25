@@ -167,7 +167,7 @@ const dataHours = [
     },
     {
         hour: '12:00',
-        time: 'am'
+        time: 'pm'
     },
     {
         hour: '01:00',

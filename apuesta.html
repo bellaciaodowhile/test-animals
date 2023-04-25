@@ -230,76 +230,11 @@
                 </div>
             </div>
         </section>
-        <!-- Buenas noches, estoy buscando un programador con experiencia frontend, para el desarrollo de una formulario que sea responsiva,  el formulario debe ser como el de las imágenes adjunta.
-
-        Primero.
-        El usuario debe seleccionar unas de las horas para realizar la apuesta, puede elegir 1 hora como varias horas, para poder seleccionar los animales para apostar primero debe  seleccionar la hora, la hora debe eliminarse 10 minutos antes de la hora marcada , ejemplo para la hora de la 09:00 am el formulario debe quitar esa hora a las 08:50 am. Las horas marcada deben tener un icono de verificación.
-
-        Selección de animalitos.
-        El formulario debe marcar con un icono de verificación los animales seleccionados , al momento de seleccionar un animal abrirá un modal con la imagen del animal y el monto que desea ingresar el usuario, el formulario debe tener un monto minimo y un monto maximo para apostar , ejemplo Apuesta Minima 1 - Apuesta Maxima 20,  el formulario solo permitirá valor dentro de esos parámetros , los valores de apuesta minima y apuesta maxima seran definidos en una variable php $apuesta_minia=1; $apuesta_maxima=20;
-
-        una vez  marcado los animales debe aparecer en un recuadro en la parte derecha indicando el monto apostado.
-
-        El recuadro derecho mostrara el saldo del usuario para realizar la apuesta lo definiremos como $balance,  al momento de presionar el boton "Apostar" el formulario debe verificar que la apuesta realizada no debe superar el saldo disponible que tiene el usuario en la variable $balance.
-
-        una vez realizado la apuesta el formulario debe mostrar un modal con los resultados de la apuesta ,  ejemplo Oso 09:00  AM Procesada,
-
-        El formulario deberá cambiar las imágenes de los animales y el logo de la lotería en la parte superior mediante una variable GET
-
-        la imagen adjunta el referencia al funcionamiento , el formulario que se realizara debe tener un daspecto diferente pero con la misma funcionalidad, al  programador el enviare una plantilla donde debe colocar el formulario para que todos los colores y el diseño del mismo sea acorde al sitio -->
-        <!-- Start Form -->
-
-
-
-
-
-
-        <!-- otro detalles es que no esta marcando con un signo de verificacion los animales elegidos -->
-
-
-
-
-
-
-
 
         <div class="main-modal-animals">
             <div class="modal-content-animals">
                 <i class="material-icons-outlined close-modal-animals">close</i>
-                <div class="form-final-content">
-                    <form>
-                        <div class="hours-selected-final">
-                            <div class="item-hour-selected">
-                                9:00
-                            </div>
-                        </div>
-                        <div class="animals-selected-final">
-                            <div class="item-animals-selected">
-                                <img src="./assets/img/animals/helpers/logo.png">
-                                <div>Animal</div>
-                                <span>10</span>
-                            </div>
-                            <div class="item-animals-selected">
-                                <img src="./assets/img/animals/helpers/logo.png">
-                                <div>Animal</div>
-                                <span>10</span>
-                            </div>
-                            <div class="item-animals-selected">
-                                <img src="./assets/img/animals/helpers/logo.png">
-                                <div>Animal</div>
-                                <span>10</span>
-                            </div>
-                            <div class="item-animals-selected">
-                                <img src="./assets/img/animals/helpers/logo.png">
-                                <div>Animal</div>
-                                <span>10</span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn-play-game btn-final-send">
-                            Confirmar
-                        </button>
-                    </form>
-                </div>
+                <div class="form-final-content"></div>
                 <div class="form-modal">
                     <div class="alert">El rango para jugar es entre 1 y 20</div>
                     <div class="main-current-animal">
@@ -475,6 +410,7 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/moment-timezone-with-data.min.js"></script>
     <script src="assets/js/data.animals.js"></script>
     <script src="assets/js/form-animals.js"></script>
 

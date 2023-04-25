@@ -1,9 +1,7 @@
-console.log('Index Js')
 const closeModalAnimals = document.querySelector('.close-modal-animals')
 const numberAnimal = document.querySelector('.number-animal')
 const currentAnimal = document.querySelector('.current-animal')
 const valueAnimals = document.querySelector('input.value-animals')
-
 closeModalAnimals.addEventListener('click', (e) => {
     e.preventDefault()
     closeModalAnimals.parentElement.parentElement.style.display = 'none'
@@ -12,7 +10,6 @@ closeModalAnimals.addEventListener('click', (e) => {
 valueAnimals.addEventListener('keyup', (e) => {
     if (e.target.value > 20) e.target.value = 20; // Valor máximo de apuesta por animal
 })
-
 // Form Animals Only
 const formModal = document.querySelector('.main-modal-animals .form-modal')
 const formFinalContent = document.querySelector('.main-modal-animals .form-final-content')
@@ -53,20 +50,6 @@ sendOnlyAnimals.addEventListener('click', (e) => {
         animalsSelectedFunc()
     }
 })
-function deleteItem(e, name) {
-    if (confirm(`¿Seguro que quiere eliminar al ${ name } de sus apuestas?`))  {
-        e.target.parentElement.remove()
-        animalsSelected = animalsSelected.filter(x => {
-            if (x.name != name) { return x }
-        })
-        const total = animalsSelected.reduce((previous, current) => {
-            return parseInt(previous) + parseInt(current.value);
-        }, 0);
-        animalsUnChecked(name)
-        totalForm.innerHTML = total + ',00'
-    }
-}
-
 // Data Animals
 const dataAnimalsContent = document.querySelector('.data-animals-content')
 dataAnimals.map((el, index) => {
@@ -84,7 +67,7 @@ function animalsChecked() {
             if (animal.trim() == x.name.trim()) {
                 if (el.children[1].style.opacity == '' || el.children[1].style.opacity == '0') {
                     el.children[1].style.opacity = '1'
-                } 
+                }
             }
         })
     })
@@ -110,56 +93,59 @@ let hoursSelected = []
 const itemsHours = [...document.querySelectorAll('.grid-animals .item-hour.active')]
 const hoursSelectedForm = document.querySelector('.hours-selected-form')
 const stopHours = [
-    '8:50',
-    '9:50',
-    '10:50',
-    '11:50',
-    '12:50',
-    '1:50',
-    '2:50',
-    '3:50',
-    '4:50',
-    '5:50',
-    '6:50'
+    '8:50am',
+    '9:50am',
+    '10:50am',
+    '11:50am',
+    '12:50pm',
+    '1:50pm',
+    '2:50pm',
+    '3:50pm',
+    '4:50pm',
+    '5:50pm',
+    '6:50pm'
 ];
-
-
 itemsHours.map((el, index) => {
     const time = el.textContent.trim()
     const img = el.children[0]
-
     // Acá el restar las horas 
-    // setInterval(() => {
-    //     let timeCurrent = moment().format('h:mma')
-    //     // console.log(timeCurrent)
-       
-    //     let beginningTime = moment(stopHours[index]+'am', 'h:mma');
-    //     let endTime = moment(timeCurrent, 'h:mma');
-    //     let valid = beginningTime.isBefore(endTime)
-    //     if (valid) {
-    //         el.textContent = time
-    //     } else {
-    //         // el.textContent = time
-    //         el.textContent = '-- : --'
-    //     }
-    //     // console.log(beginningTime.isBefore(endTime)); // true
-    // }, 1000);
-
+    let timeVnzlaCurrent = moment().tz("America/Caracas").format('h:mma')
+    let timesPointsExp = moment(stopHours[index], 'h:mma');
+    let firstExp = new moment(timeVnzlaCurrent, 'h:mma')
+    let twoExp = new moment(timesPointsExp._i, 'h:mma')
+    // console.log(moment().tz("America/Caracas").format('h:mma'))
+    setInterval(() => {
+        let timesPoints = moment(stopHours[index], 'h:mma');
+        let timeVnzlaCurrent = moment().tz("America/Caracas").format('h:mma')
+        let first = new moment(timeVnzlaCurrent, 'h:mma')
+        let two = new moment(timesPoints._i, 'h:mma')
+        if (first > two) {
+            el.textContent = '-- : --'
+            el.setAttribute('time', '-- : --')
+            el.classList.add('inactive')
+            el.classList.remove('active')
+        } else if (first < two) {}
+    }, 1000);
 
     el.addEventListener('click', (e) => {
         e.preventDefault()
         if (img.style.opacity == '' || img.style.opacity == '0') {
             img.style.opacity = '1'
-            hoursSelected.push( time )
+            if (firstExp < twoExp) {
+                hoursSelected.push(time)
+            }
         } else {
             img.style.opacity = '0'
             hoursSelected = hoursSelected.filter(x => {
-                if (x != time) { return x }
+                if (x != time) {
+                    return x
+                }
             })
         }
         hoursSelectedFunc()
     })
 })
+
 function hoursSelectedFunc() {
     hoursSelectedForm.innerHTML = ''
     hoursSelected.map(el => {
@@ -170,6 +156,22 @@ function hoursSelectedFunc() {
     })
     animalsSelectedFunc()
 }
+function deleteItem(e, name) {
+    if (confirm(`¿Seguro que quiere eliminar al ${ name } de sus apuestas?`)) {
+        e.target.parentElement.remove()
+        animalsSelected = animalsSelected.filter(x => {
+            if (x.name != name) {
+                return x
+            }
+        })
+        const total = animalsSelected.reduce((previous, current) => {
+            return parseInt(previous) + parseInt(current.value);
+        }, 0);
+        animalsUnChecked(name)
+        totalForm.innerHTML = (total * hoursSelected.length) + ',00'
+    }
+}
+
 function animalsSelectedFunc() {
     animalsSelectedForm.innerHTML = ''
     animalsSelected.map(el => {
@@ -179,15 +181,14 @@ function animalsSelectedFunc() {
             <div>${ el.name }</div>
             <span>${ (hoursSelected.length * el.value) }</span>
             <i class="material-icons" onclick="deleteItem(event, '${ el.name }')">delete</i>
-        </div>` 
+        </div>`
     })
     const total = animalsSelected.reduce((previous, current) => {
         return parseInt(previous) + parseInt(current.value);
     }, 0);
     totalForm.innerHTML = (total * hoursSelected.length) + ',00'
-  
-}
 
+}
 
 // Show Modal Animals
 itemsAnimals.map((el, index) => {
@@ -216,25 +217,11 @@ const dateCurrentDom = document.querySelector('.form-total .date span')
 dateCurrentDom.innerHTML = currentDate
 
 // Final Form Total
-const itemsAnimalsSelectedFinal = [...document.querySelectorAll('.form-total .item-animals-selected')]
-const itemsHoursSelectedFinal = [...document.querySelectorAll('.form-total .item-hour-selected')]
-function totalFormFunc() {
-    console.log('Hola')
-    // totalForm.innerHTML = total + ',00'
-    let valueTotal = []
-    console.log(itemsAnimalsSelectedFinal)
-    itemsAnimalsSelectedFinal.map(el => {
-        console.log(el)
-        // valueTotal.push(parseInt(el.querySelector('span').textContent.trim()))
-    })
-    const total = valueTotal.reduce((previous, current) => {
-        return parseInt(previous) + parseInt(current);
-    }, 0);
-    // console.log(valueTotal)
-}
 const btnSendFormTotal = document.querySelector('.form-total .btn-send')
 btnSendFormTotal.addEventListener('click', (e) => {
     e.preventDefault();
+    const itemsAnimalsSelectedFinal = [...document.querySelectorAll('.form-total .item-animals-selected')]
+    const itemsHoursSelectedFinal = [...document.querySelectorAll('.form-total .item-hour-selected')]
     let valueTotal = []
     let animalsFinal = []
     let hoursSelectedFinal = []
@@ -248,20 +235,22 @@ btnSendFormTotal.addEventListener('click', (e) => {
     const total = valueTotal.reduce((previous, current) => {
         return parseInt(previous) + parseInt(current);
     }, 0);
-    if (total <= myBalance) {
-        // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
-        const formFinal = [hoursSelectedFinal, animalsFinal, currentDate]
-        closeModalAnimals.parentElement.parentElement.style.display = 'flex'
-        formModal.style.display = 'none'
-        formFinalContent.style.display = 'block'    
-        
-
-
-
-
-        console.log(formFinal)
+    if (hoursSelected.length > 0) {
+        if (total <= myBalance) {
+            const formFinal = [hoursSelectedFinal, animalsFinal, currentDate] // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
+            let finalFormText = `+ Fecha: `
+            finalFormText += formFinal[2] + ' \n'
+            finalFormText += `+ Horarios: \n`
+            formFinal[0].map(hour => finalFormText += `- ${hour} \n`)
+            finalFormText += `+ Jugadas: \n`
+            formFinal[1].map(animal => finalFormText += `- ${animal} Procesado \n`)
+            finalFormText += `+ Total: ${total}\n`
+            finalFormText += '¡¡Gracias por su compra!!'
+            alert(finalFormText)
+        } else {
+            alert('Debe recargar su saldo para hacer las apuestas, verifique su balance por favor...')
+        }
     } else {
-        alert('Debe recargar su saldo para hacer las apuestas, verifique su balance por favor...')
+        alert('Debe seleccionar una hora')
     }
 })
-
