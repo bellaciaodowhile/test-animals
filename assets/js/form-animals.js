@@ -245,7 +245,7 @@ btnSendFormTotal.addEventListener('click', (e) => {
     if (hoursSelected.length > 0) {
         if (animalsFinal.length > 0) {
             if (total <= myBalance) {
-                const formFinal = [hoursSelectedFinal, animalsFinal, currentDate] // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
+                // const formFinal = [hoursSelectedFinal, animalsFinal, currentDate] // Acá está un array donde puede ver todos los datos que ha enviado en usuario 'formFinal'
                 const itemsHoursFormFinal = document.querySelector('.hours-final-form')
                 const itemsAnimalsFormFinal = document.querySelector('.animals-final-form')
                 const fechaFinal = document.querySelector('.fecha-final span')
@@ -317,4 +317,10 @@ btnSendFinalForm.addEventListener('click', (e) => {
     setTimeout(() => {
         window.location.reload();
     }, 2000);
+})
+
+document.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    alert('Hola Daniel Teran! Este es el ejemplo que te quería mostrar. Tomando en cuenta que al registrarse puedas ver los datos de los usuarios y su compra: Ejmplo: Nombre Apellido. Animal 00 - Ballena 15bs - Animal 0 - Delfín 20bs y así... Y alfinal puedas avisarle al usuario por Whatsapp según sea su número: +58 412 297 4011 y así sucesivamente con los demás usuarios. Si estás de acuerdo con el ejemplo me respondes por Workana que: No me gusta ese ejemplo, puedes darme otro? Ahora, si no te gusta el ejemplo: me dices que si te gusta. Esto para minimizar comisiones a los usuarios que usen la web')
 })
